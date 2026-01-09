@@ -1,0 +1,22 @@
+# macOS system files
+.DS_Store
+
+# Terraform state and plan files
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfplan.json
+*.tfbackup
+*.tfignore
+*.tfvars
+*.tfvars.json
+
+# Terraform working directories and lock files
+.terraform/
+.terraform.lock.hcl
+
+# Terraform RC files (user-specific configuration)
+.terraformrc
+
+# Legacy or backup files
+terraform.tfstate.backup

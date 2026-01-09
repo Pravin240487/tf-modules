@@ -1,0 +1,37 @@
+name: Terraform Security Scan
+
+on:
+  pull_request:
+    branches:
+      - new-main
+  workflow_dispatch:
+    
+jobs:
+  iac-scan:
+    name: IAC Scan
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.8
+
+      - name: Trivy Scan
+        uses: aquasecurity/trivy-action@0.32.0
+        with:
+          scan-type: 'config'
+          hide-progress: true
+          format: 'table'
+          exit-code: '1'
+          severity: 'CRITICAL,HIGH'
+
+      # - name: Checkov Scan
+      #   if: always()
+      #   id: checkov
+      #   uses: bridgecrewio/checkov-action@master
+      #   with:
+      #     directory: .
+      #     framework: terraform
+      #     skip_check: CKV_TF_1,CKV_TF_2
